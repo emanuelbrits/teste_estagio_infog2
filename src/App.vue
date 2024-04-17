@@ -1,9 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import { FaBars } from "oh-vue-icons/icons";
 </script>
 
 <template>
-
   <RouterView />
 </template>
 
