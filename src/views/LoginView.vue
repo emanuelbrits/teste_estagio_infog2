@@ -19,7 +19,7 @@ async function login() {
         console.log(data);
         auth.setToken(data.token)
         auth.setUser(data)
-        await router.push('/utilitarios')
+        await router.push('/')
     } catch (error) {
         console.log(error?.response?.data);
     }

@@ -10,7 +10,7 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue')
     },
     {
-      path: '/utilitarios',
+      path: '/',
       name: 'utilitarios',
       component: () => import('../views/UtilitariosView.vue'),
       meta: {
