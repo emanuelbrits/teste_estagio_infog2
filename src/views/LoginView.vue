@@ -1,17 +1,28 @@
 <script setup>
 
 import { reactive, ref } from 'vue';
+import  http from '@/services/http.js'
+import { useAuth } from '@/stores/auth.js';
+import router from '@/router';
 
-const email = ref('')
-const senha = ref('')
+const auth = useAuth()
 
 const user = reactive({
-    email: '',
-    senha: ''
+    username: '',
+    password: ''
 });
 
-function login() {
-    console.log(user.email, user.senha);
+async function login() {
+    try {
+        const {data} = await http.post('a/auth/login_colaborador/', user)
+        http.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
+        console.log(data);
+        auth.setToken(data.token)
+        auth.setUser(data)
+        await router.push('/utilitarios')
+    } catch (error) {
+        console.log(error?.response?.data);
+    }
 }
 
 </script>
@@ -23,14 +34,14 @@ function login() {
         <div class="loginContainer">
             <div class="cardLogin">
                 <h1><b>Login</b></h1>
-                <form action="" v-on:submit.prevent="login">
+                <form @submit.prevent="login">
                     <div class="emailForm">
                         <p><b>Email</b></p>
-                        <input type="text" placeholder="" v-model="user.email">
+                        <input type="text" placeholder="" v-model="user.username">
                     </div>
                     <div class="senhaForm">
                         <p><b>Senha</b></p>
-                        <input type="password" placeholder="" v-model="user.senha">
+                        <input type="password" placeholder="" v-model="user.password">
                     </div>
                     <div class="areaBotoes">
                         <button class="botaoEsqueceu"><b>Esqueceu a senha?</b></button>

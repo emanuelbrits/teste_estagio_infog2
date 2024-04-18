@@ -1,4 +1,7 @@
 <script setup>
+    import { ref } from 'vue';
+
+    const user = ref(JSON.parse(localStorage.getItem('user')))
 </script>
 
 <template>
@@ -9,7 +12,7 @@
                 <h3>Utilitários</h3>
             </div>
             <div class="direitaCabecalho">
-                <h3>Manager</h3>
+                <h3>{{ user.nome }}</h3>
             </div>
         </div>
         <div class="areaUtilitarios">
@@ -171,6 +174,7 @@
                     i:hover {
                         background-color: #007AD6;
                         border-radius: 50%;
+                        transition: 0.2s;
                     }
                 }
             }
@@ -190,6 +194,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
+            padding-left: 4rem;
             width: 97%;
             background-color: #F5F6F7;
 
