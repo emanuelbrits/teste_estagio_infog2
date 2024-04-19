@@ -98,6 +98,9 @@ body {
 .tela {
     display: flex;
     flex-direction: column;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0;
 
     .cabecalho {
         margin: 0;
@@ -151,7 +154,7 @@ body {
     }
 
     .areaUsuarios {
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: row;
 
@@ -284,8 +287,6 @@ body {
                     flex-direction: column;
                     width: 100%;
                     margin: 0;
-                    background: #F5F6F7;
-
 
                     .cardUsuario {
                         display: flex;
@@ -293,7 +294,8 @@ body {
                         gap: 15rem;
                         max-width: 95%;
                         background-color: white;
-                        margin-top: 2rem;
+                        margin-top: 1rem;
+                        margin-bottom: 1rem;
                         margin-left: 1rem;
                         border-radius: 15px;
 
