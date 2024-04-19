@@ -16,6 +16,14 @@ const router = createRouter({
       meta: {
         auth: true
       }
+    },
+    {
+      path: '/usuarios',
+      name: 'usuarios',
+      component: () => import('../views/UsuariosView.vue'),
+      meta: {
+        auth: true
+      }
     }
   ]
 })
@@ -30,7 +38,6 @@ router.beforeEach((to, from, next) => {
     } else {
       next({name: 'login'})
     }
-    console.log(to.name);
   } else {
     next()
   }

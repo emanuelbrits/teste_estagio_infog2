@@ -1,7 +1,5 @@
 <script setup>
-    import { ref } from 'vue';
-
-    const user = ref(JSON.parse(localStorage.getItem('user')))
+import { ref } from 'vue';
 </script>
 
 <template>
@@ -12,7 +10,7 @@
                 <h3>Utilitários</h3>
             </div>
             <div class="direitaCabecalho">
-                <h3>{{ user.nome }}</h3>
+                <h3>Manager</h3>
             </div>
         </div>
         <div class="areaUtilitarios">
@@ -38,9 +36,9 @@
                         </a>
                     </div>
                     <div class="conteudo">
-                        <a href="">
+                        <a href="/usuarios">
                             <i class="pi pi-user" style="font-size: 5rem"></i>
-                            <h4>Usuário</h4>
+                            <h4>Usuários</h4>
                         </a>
                     </div>
                     <div class="conteudo">

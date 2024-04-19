@@ -16,7 +16,6 @@ async function login() {
     try {
         const {data} = await http.post('a/auth/login_colaborador/', user)
         http.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
-        console.log(data);
         auth.setToken(data.token)
         auth.setUser(data)
         await router.push('/')
