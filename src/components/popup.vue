@@ -615,8 +615,8 @@ function closePopup() {
                 width: 35%;
 
                 .foto {
-                    max-width: 15rem;
-                    max-height: 15rem;
+                    max-width: 12rem;
+                    max-height: 12rem;
                     margin-left: 1.5rem;
                 }
 
@@ -626,8 +626,8 @@ function closePopup() {
                     margin-right: 8rem;
 
                     img {
-                        max-width: 4rem;
-                        max-height: 4rem;
+                        max-width: 3rem;
+                        max-height: 3rem;
                     }
                 }
             }
