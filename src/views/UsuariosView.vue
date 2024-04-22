@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import adicionaUsuarios from '@/hooks/usuariosHooks';
+import popup from '@/components/popup.vue';
 
 var usuarios = ref([]);
 
@@ -30,7 +31,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="areaUsuarios">
-                <div class="sidebar">
+                <nav class="sidebar">
                     <div class="cimaSidebar">
                         <a href=""><i class="pi pi-objects-column" style="font-size: 2rem"></i></a>
                         <a href=""><i class="pi pi-users" style="font-size: 2rem"></i></a>
@@ -42,7 +43,7 @@ onMounted(() => {
                     <div class="baixoSidebar">
                         <img src="../assets/infog2_logo.png" alt="">
                     </div>
-                </div>
+                </nav>
                 <div class="areaConteudoUsuarios">
                     <div class="conteudoUsuarios">
                         <div class="cimaConteudo">
@@ -58,6 +59,7 @@ onMounted(() => {
                             <img src="/src/assets/fantasminha.png" alt="">
                         </div>
                         <div v-else class="baixoConteudoUsuario">
+                            <popup></popup>
                             <div class="cardUsuario" v-for="usuario in usuarios">
                                 <div class="nomeSetor">
                                     <h4>{{ usuario.nome }}</h4>
@@ -285,8 +287,16 @@ body {
                 .baixoConteudoUsuario {
                     display: flex;
                     flex-direction: column;
+                    justify-content: center;
                     width: 100%;
                     margin: 0;
+
+                    .popup {
+                        display: flex;
+                        justify-content: center;
+                        width: 100%;
+                        margin-top: 2rem;
+                    }
 
                     .cardUsuario {
                         display: flex;
@@ -358,8 +368,8 @@ body {
                                 height: 100%;
 
                                 h5 {
-                                margin: 0;
-                            }
+                                    margin: 0;
+                                }
                             }
                         }
                     }
