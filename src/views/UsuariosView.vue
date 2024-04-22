@@ -7,9 +7,20 @@ var usuarios = ref([]);
 
 adicionaUsuarios(usuarios)
 
+const showPopup = ref(false);
+
+function openPopup() {
+    showPopup.value = true;
+}
+
+function closePopup() {
+    showPopup.value = false;
+}
+
 onMounted(() => {
     adicionaUsuarios();
 });
+
 </script>
 
 <template>
@@ -53,14 +64,13 @@ onMounted(() => {
                                     <input type="text" class="input-field" name="search" placeholder="Nome e CPF">
                                 </div>
                             </form>
-                            <button><i class="pi pi-plus" style="font-size: 1.5rem"></i></button>
+                            <button @click="openPopup"><i class="pi pi-plus" style="font-size: 1.5rem"></i></button>
                         </div>
                         <div v-if="usuarios.length <= 0" class="baixoConteudoFantasma">
                             <img src="/src/assets/fantasminha.png" alt="">
                         </div>
                         <div v-else class="baixoConteudoUsuario">
-                            <popup></popup>
-                            <div class="cardUsuario" v-for="usuario in usuarios">
+                            <div v-if="showPopup === false" class="cardUsuario" v-for="usuario in usuarios">
                                 <div class="nomeSetor">
                                     <h4>{{ usuario.nome }}</h4>
                                     <h5>{{ usuario.perfil_str }}</h5>
@@ -82,6 +92,33 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </div>
+                            <div class="telaPopup" v-if="showPopup === true">
+                                <popup @close="closePopup"></popup>
+                                <div class="telaUsuarios" style="position: fixed; z-index: -1;">
+                                    <div class="cardUsuario" v-for="usuario in usuarios">
+                                        <div class="nomeSetor">
+                                            <h4>{{ usuario.nome }}</h4>
+                                            <h5>{{ usuario.perfil_str }}</h5>
+                                        </div>
+                                        <div class="status">
+                                            <h5>{{ usuario.status }}</h5>
+                                        </div>
+                                        <div class="cpfCnpj">
+                                            <i class="pi pi-shop" style="font-size: 1.5rem"></i>
+                                            <h4>{{ usuario.cpf_cnpj_formatado }}</h4>
+                                        </div>
+                                        <div class="enderecoCidade">
+                                            <div class="iconLocal">
+                                                <i class="pi pi-map-marker" style="font-size: 1.5rem"></i>
+                                            </div>
+                                            <div class="dadosEnderecoCidade">
+                                                <h5>{{ usuario.endereco_residencial }}</h5>
+                                                <h5>{{ usuario.cidade }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,6 +132,7 @@ body {
     margin: 0 auto;
     position: absolute;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .tela {
@@ -115,7 +153,7 @@ body {
         background-color: #007AD6;
         color: white;
         position: fixed;
-        z-index: 1;
+        z-index: 2;
 
         .esquerdaCabecalho {
             width: 18%;
@@ -168,7 +206,7 @@ body {
             background-color: #0091FF;
             justify-content: space-between;
             position: fixed;
-            z-index: 0;
+            z-index: 1;
 
             .cimaSidebar {
                 display: flex;
@@ -292,10 +330,15 @@ body {
                     margin: 0;
 
                     .popup {
+                        position: absolute;
+                        z-index: 99;
+                        background-color: rgba(0, 0, 0, 0.2);
+                        top: 0;
                         display: flex;
+                        align-items: center;
                         justify-content: center;
                         width: 100%;
-                        margin-top: 2rem;
+                        max-width: 97%;
                     }
 
                     .cardUsuario {

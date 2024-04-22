@@ -130,7 +130,7 @@ onMounted(() => {
 });
 
 watchEffect(() => {
-    if (usuario.value.endereco_residencial.cidade !== -1) {
+    if (usuario.value.endereco_residencial.cidade != "") {
         getBairros(usuario.value.endereco_residencial.cidade, bairros);
     }
 
@@ -240,6 +240,13 @@ watch(dataEmissao, (newValue) => {
         usuario.value.data_emissao_carteira_trabalho = '';
     }
 });
+
+const emit = defineEmits();
+
+function closePopup() {
+    emit('close');
+}
+
 </script>
 
 <template>
@@ -247,7 +254,7 @@ watch(dataEmissao, (newValue) => {
         <div class="conteudoPopup">
             <div class="topoPopup">
                 <h3>Novo usuário</h3>
-                <button @click="Cancelar"><i class="pi pi-times" style="font-size: 1.5rem"></i></button>
+                <button @click="closePopup"><i class="pi pi-times" style="font-size: 1.5rem"></i></button>
             </div>
             <form @submit.prevent="adicionarUsuario">
                 <div class="dadosBasicos">
@@ -522,7 +529,7 @@ watch(dataEmissao, (newValue) => {
                         </div>
                     </div>
                     <div class="botoes">
-                        <button class="botaoCancelar" @click="Cancelar">Cancelar</button>
+                        <button class="botaoCancelar" @click="closePopup">Cancelar</button>
                         <input type="submit" class="botaoSalvar" placeholder="salvar">
                     </div>
                 </div>
@@ -858,14 +865,14 @@ watch(dataEmissao, (newValue) => {
                     gap: 3%;
 
                     .maps {
-                    display: flex;
-                    align-items: center;
-                    margin-bottom: 0.6rem;
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 0.6rem;
 
-                    a {
-                        text-decoration: none;
+                        a {
+                            text-decoration: none;
+                        }
                     }
-                }
                 }
             }
 
